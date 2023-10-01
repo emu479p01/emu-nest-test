@@ -19,7 +19,16 @@ export class AuthService {
     const payload = { sub: user.userid, username: user.username };
 
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      status_code: 200,
+      message: 'Successful login',
+      payload: {
+        access_token: await this.jwtService.signAsync(payload),
+        user: {
+          userId: user.userid,
+          username: user.username,
+          email: user.email
+        }
+      }
     };
   }
 }
